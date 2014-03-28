@@ -1,0 +1,10 @@
+@CHARSET "UTF-8";
+
+span.errorContainer{
+	background:url("images/unchecked.gif") no-repeat 0px 0px;
+	
+}
+
+#content table tr .error_td{
+	text-align: left;
+}

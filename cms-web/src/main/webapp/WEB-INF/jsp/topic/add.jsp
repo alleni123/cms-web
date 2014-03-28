@@ -1,0 +1,263 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+	String cssPath = request.getContextPath() + "/resources/css";
+%>
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<base href="<%=basePath%>">
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/resources/css/validate/main.css" />
+<link rel="stylesheet" type="text/css"
+	href="<%=path%>/resources/css/admin/main.css" />
+<link rel="stylesheet" type="text/css"
+	href="<%=cssPath%>/ztree/zTreeStyle.css" />
+<link rel="stylesheet" type="text/css"
+	href="<%=path%>/resources/xeditor/demos/common.css" />
+
+
+<link rel="stylesheet" type="text/css"
+	href="<%=path%>/resources/js/base/jquery.ui.all.css" />
+<link rel="stylesheet" type="text/css"
+	href="<%=path%>/resources/uploadify/uploadify.css" />
+
+
+<!-- jquery 1.9和xheditor不兼容， 要换成这个1.7.2才行 -->
+<!--src="<%=path%>/resources/js/jquery-1.7.2.min.js">-->
+<script type="text/javascript"
+	src="<%=path%>/resources/js/jquery-1.7.2.min.js">
+	
+</script>
+<script type="text/javascript"
+	src="<%=path%>/resources/js/ui/jquery-ui.custom.js">
+	
+</script>
+
+<script type="text/javascript"
+	src="<%=path%>/resources/js/ui/jquery.ui.core.js">
+	
+</script>
+
+<script type="text/javascript"
+	src="<%=path%>/resources/js/i18n/jquery-ui-i18n.js">
+	
+</script>
+
+<script type="text/javascript"
+	src="<%=path%>/resources/js/tree/jquery.ztree.core-3.5.js"></script>
+
+
+<script type="text/javascript"
+	src="<%=path%>/resources/xeditor/xheditor-1.1.14-zh-cn.min.js">
+	
+</script>
+
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/resources/js/core/jquery.cms.keywordinput.css" />
+
+
+<script type="text/javascript"
+	src="<%=path%>/resources/js/core/jquery.cms.core.js">
+	</script>
+<script type="text/javascript"
+	src="<%=path%>/resources/js/core/jquery.cms.keyword.js">
+	
+</script>
+
+<script type="text/javascript"
+	src="<%=path%>/resources/js/admin/main.js">
+</script>
+
+<script type="text/javascript"
+	src="<%=path%>/resources/uploadify/jquery.uploadify.js"></script>
+
+<script type="text/javascript"
+	src="<%=path%>/resources/js/admin/topicAdd.js"></script>
+	
+	
+	<script type="text/javascript"
+	src="<%=request.getContextPath()%>/dwr/engine.js"></script>
+<script type="text/javascript"
+	src="<%=request.getContextPath()%>/dwr/interface/dwrService.js"></script>
+	
+
+
+<script type="text/javascript">
+	/*文章添加下拉功能：60文章管理 35分钟*/
+	/*js文件路径-> resources/js/admin/topicAdd.js*/
+	var mt;
+	$(function(){
+		  	$("#keyword").keydown(function(event){
+			var code=event.keyCode;
+			if(code==13){
+			return ;
+			}
+		});
+	});
+
+	
+</script>
+
+
+</head>
+
+<body>
+
+
+	<input type="hidden" id="sid" value="<%=session.getId()%>" />
+	<input type="hidden" id="contextPath" value="<%=path%>" />
+	<!--???-->
+
+	<!-- ztree显示下拉隐藏菜单的地方 -->
+	<div id="menuContent" class="menuContent"
+		style="display:none;position:absolute;background:#eee;z-index:999;border:1px solid #999">
+		<ul id="mytree" class="ztree" style="margin-top:0;width:160px;"></ul>
+	</div>
+
+
+	<div id="container">
+		<jsp:include page="/jsp/admin/top_inc.jsp"></jsp:include>
+		<div id="contents">
+			<input type="hidden" id="ctx" value="<%=path%>" />
+			<h3 class="admin_link_bar" style="text-align:center">
+				<span>添加文章功能</span>
+			</h3>
+
+			<sf:form method="post" modelAttribute="topicDto" id="addForm">
+				<table width="980" cellspacing="0" cellpadding="0" id="addTable">
+					<tr>
+						<td class="rightTd" width="120px">文章标题:</td>
+						<td class="leftTd"><sf:input path="title" size="80" /> <sf:errors
+								cssClass="errorContainer" path="title" /></td>
+					</tr>
+
+
+					<tr>
+						<td class="rightTd">文章栏目:</td>
+						<td class="leftTd"><input type="text" readonly="readonly"
+							name="channel_name" id="channel_name" /> <input type="text"
+							readonly="readonly" name="channel_id" id="channel_id" value="0">
+							<sf:errors cssClass="errorContainer" path="channel_id" /></td>
+					</tr>
+
+
+					<c:choose>
+						<c:when test="${isAdmin||isAudit}">
+							<tr>
+								<td class="rightTd">文章状态:</td>
+								<td class="leftTd"><sf:radiobutton path="status" value="0" /><label for="status1">未发布</label>
+									<sf:radiobutton path="status" value="1" /><label for="status2">已发布</label>
+									</td>
+							</tr>
+						</c:when>
+						<c:otherwise>
+							<sf:hidden path="status" />
+						</c:otherwise>
+
+					</c:choose>
+
+
+
+					<tr>
+						<td class="rightTd">是否推荐该文章</td>
+						<td class="leftTd"><sf:radiobutton path="recommend" value="0" /><label for="recommend1">不推荐</label>
+							<sf:radiobutton path="recommend" value="1" /><label for="recommend2">推荐</label></td>
+					</tr>
+
+					<tr>
+						<td class="rightTd">发布时间:</td>
+						<td class="leftTd"><sf:input path="publishDate" />
+						</td>
+					</tr>
+
+					<tr>
+						<td class="rightTd">文章关键字:</td>
+						<td class="leftTd"><sf:input path="keyword" /></td>
+					</tr>
+
+					<tr>
+						<td class="rightTd">文章附件</td>
+						<td class="leftTd">
+							<div id="attachs"></div> <input type="file" id="attach"
+							name="attach" /> <input type="button" id="uploadFile"
+							value="上传文件" /></td>
+					</tr>
+
+					<tr>
+						<td colspan="2">已传文件</td>
+					</tr>
+
+					<tr>
+						<td colspan="2">
+							<!-- 文件信息开始， 这里用一个table来显示所有文件信息 -->
+							<table id="ok_attach" width="890px" cellspacing="0"
+								cellpadding="0" border="1px solid blue">
+								<thead>
+									<tr>
+										<td>文件名缩略图</td>
+										<td width="180px">文件名</td>
+										<td>文件大小</td>
+										<td>主页图片</td>
+										<td>栏目图片</td>
+										<td>附件信息</td>
+										<td width="160px">操作</td>
+									</tr>
+								</thead>
+									<!-- tbody里面会被加入文件信息。使用$("tbody").find()来获取具体文件信息 -->
+								<tbody>
+								</tbody>
+
+							</table></td>
+					</tr>
+
+					<tr>
+						<td colspan="2">文章内容</td>
+					</tr>
+
+					<tr>
+						<td colspan="2"><sf:textarea path="content" rows="25"
+								cols="110" /></td>
+					</tr>
+						
+					<tr>
+						<td colspan="2">文章摘要</td>
+					</tr>
+						
+					<tr>
+						<td colspan="2"><sf:textarea path="summary" rows="5"
+								colspan="110" /></td>
+					</tr>
+
+					<tr>
+						<td colspan="2" class="centerTd"><input type="submit"
+							id="addBtn" value="添加文章" /> <input
+							type="reset" /> <!-- 这里设置为button,并且捆绑事件 onclick='this.form.submit()',这样防止keyword添加时按了回车而提交form -->
+							<!-- 2/22更新： 由于孔浩这里将input的submit类型改为button类型，结果导致xheditor的内容提交不成功。
+											exheditor大概是将原本id=content的textarea设置为display:none,并在我们提交表单的时候将它自己的内容转换到id=content的textarea中。
+											（我猜想是这样）。
+											这里如果按照上述的孔浩的改法，会导致提交表单之后，文章内容没有被提交到后台。
+											所以这里改回input type=submit,并将id=keyword的输入框中加入事件监听，当输入回车的时候，便只执行keyword的插入，而不提交表单。
+							 -->
+						
+						</td>
+					</tr>
+
+
+				</table>
+
+
+			</sf:form>
+
+		</div>
+	</div>
+
+</body>
+</html>

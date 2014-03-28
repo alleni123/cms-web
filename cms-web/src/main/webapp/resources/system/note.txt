@@ -1,0 +1,4 @@
+/resources/system 用于放置系统代码文件。
+如js,css以及系统所需要的图片等等。
+
+该文件夹区别于user。user用于存放用户上传的文件。

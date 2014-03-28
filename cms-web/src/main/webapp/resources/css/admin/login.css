@@ -1,0 +1,74 @@
+*{
+	padding:0;
+	margin:0;
+	font-size:12px;
+}
+
+#container{
+	width:1034px;
+	position:absolute;
+	left:50%;
+	/*border:1px solid #999;*/
+	margin-left:-517px;
+	height:648px;
+	
+}
+#top{
+	width:1034px;
+	height:81px;
+	background:url("img/login_top.jpg") no-repeat;
+	background-color:green;
+	
+}
+
+#loginBar{
+	width:1034px;
+	/*background-color:blue;
+	background:url("img/login_bar.jpg") no-repeat;*/
+	height:30px;
+}
+
+#loginBar span{
+	position:relative;
+	 top:10px;
+	left:0px;
+}
+
+#content {
+	
+	width:1034px;
+	height:538px;
+	background-color:red;
+	background:url("img/login_content.jpg") no-repeat;
+	
+}
+
+/* 2/18调整为玲玲做的设计，这是之前孔浩的
+#loginForm{
+	width:490px;
+	height:164px;
+	position:relative;
+	left:563px;
+	top:238px;
+}*/
+
+
+#loginForm{
+	width:490px;
+	height:164px;
+	position:relative;
+	left:618px;
+	top:181px;
+}
+
+#loginTable{
+	position:relative;
+	top:5px;
+}
+
+#loginTable td{
+	padding:6px 0px;
+	padding-left: 3px;
+	}
+
+

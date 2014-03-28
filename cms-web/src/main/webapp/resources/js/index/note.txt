@@ -1,0 +1,3 @@
+resources/js/index里面放的都是和主页面相关的。
+
+main.js包含所有top.jsp和bottom.jsp的通用脚本。

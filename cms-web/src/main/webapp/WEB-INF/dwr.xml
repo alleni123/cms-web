@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dwr PUBLIC
+    "-//GetAhead Limited//DTD Direct Web Remoting 3.0//EN"
+   "http://www.directwebremoting.org/schema/dwr30.dtd">
+    
+
+<dwr>
+ 	
+  <allow>
+  <create creator="spring" javascript="dwrService">
+  	<!-- <exclude method="setGroupService"/>
+  		<exclude method="getGroupService"/> -->
+   	<param name="beanName" value="dwrService"/>  
+	  <!-- 	<param name="class" value="com.lj.cms.dwr.DwrService"/> -->
+  </create>
+  
+  
+  <create creator="spring" javascript="groupService">
+  	<param name="beanName" value="groupService"></param>
+  	<include method=""/>
+  </create>
+  
+  <!-- 在DwrService中依赖注入了attachmentService, 这里必须设置spring的依赖注入，否则该service类中将无法得到注入的值。
+  		并且程序执行不下去且不报错， 非常麻烦
+   -->
+  <create creator="spring" javascript="attachmentService">
+  	<param name="beanName" value="attachmentService"></param>
+  </create>
+    
+  
+  </allow>
+
+</dwr>

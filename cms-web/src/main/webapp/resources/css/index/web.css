@@ -1,0 +1,351 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    font-size: 12px;
+}
+
+body {
+    background: #f3ece2;
+}
+
+a {
+    text-decoration: none;
+}
+
+em{
+	font-style: normal;
+	color:#cc0000;
+	font-weight: bold;
+}
+
+/*框架开始*/
+#header {
+    height: 108px;
+    background: url(img/header_bg.jpg);
+}
+
+#nav {
+    height: 35px;
+    /*background: #1a5688;*/
+    background-color:#20a056;
+}
+
+#content {
+    /* height: 800px; */
+
+}
+
+#bottom {
+    height: 88px;
+    background: url(img/bottom_bg.jpg);
+    width: 100%;
+    float: left;
+}
+
+#header_con, #nav_con, #content_con, #bottom_con {
+    width: 962px;
+    position: absolute;
+    left: 50%;
+    margin-left: -481px;
+    
+}
+
+#logo {
+    width: 320px;
+    height: 108px;
+    background: url(img/logo.jpg);
+    float: left;
+}
+/*框架结束*/
+
+/*导航开始*/
+#main_nav {
+    float: right;
+}
+
+#main_nav ul {
+    margin-right: 10px;
+    margin-top: 5px;
+}
+
+#main_nav li {
+    float: left;
+    list-style-type: none;
+    padding: 0px 7px;
+    border-right: 1px solid #fff;
+}
+
+a.main_nav_link:link, a.main_nav_link:visited {
+    text-decoration: none;
+    color: white;
+}
+
+a.main_nav_link:hover {
+    color: #ff0;
+}
+
+#search {
+    position: absolute;
+    left: 768px;
+    top: 80px;
+    background: url(img/search_bg.jpg);
+    width: 183px;
+    height: 19px;
+}
+
+/*这个input起的作用貌似和孔浩写的search_con一样*/
+#search input {
+    height: 19px;
+    border: none;
+    position: absolute;
+    width: 159px; /*宽度也可以通过input的size属性来设置*/
+}
+
+/*该div被点击后被调用索引功能*/
+#search_btn {
+    height: 19px;
+    width: 26px;
+    left: 156px;
+    position: absolute;
+}
+
+ 
+
+#nav_con ul li {
+    list-style: none;
+    float: left;
+    width: 90px;
+    height: 35px;
+    text-align: center;
+}
+
+#nav_con ul li:hover {
+    cursor: pointer;
+}
+
+#nav_con ul li span {
+    position: relative;
+    text-align: center;
+    top: 10px;
+    height: 40px;
+    color: #fff;
+}
+
+.nav_hover {
+    /*background-color: #992;
+     color: #fff;
+    */
+    background-color:#fff;
+    color:#fff;
+   
+}
+
+/*导航结束*/
+
+/*内容开始*/
+
+#content_con {
+    background: #fff;
+    /* height: 800px;*/
+}
+
+#slogan {
+    width: 962px;
+    height: 84px;
+    background: url(img/xiaoxun.jpg);
+}
+
+#notice_rollpic {
+    width: 962px;
+    margin-top: 5px;
+}
+
+#notice {
+    float: left;
+    width: 233px;
+    margin-left: 15px;
+}
+
+#notice dt {
+    border-bottom: 3px solid #eae6e4;
+    height: 30px;
+    color: #1a5688;
+}
+
+#notice dt span {
+    position: relative;
+    top: 6px;
+    left: 6px;
+}
+
+#notice dd,#xwgk dd, #hdjx dd, #jyky dd {
+    padding: 7px 0px;
+    border-bottom: 1px dotted #999;
+    margin-left: 4px;
+}
+
+a.index_link:link, a.index_link:visited {
+    color: #666;
+    background: url(img/topic_dot.jpg) no-repeat;
+    background-position: 0 50%;
+    padding-left: 10px;
+}
+
+a.index_link:hover {
+    color: #833;
+    text-decoration: underline;
+}
+
+/*滚动图片开始*/
+#rollpic {
+    float: left;
+    width: 692px;
+    height: 262px;
+    margin-left: 10px;
+}
+
+/**/
+#split_line {
+    background: #ccc;
+    height: 3px;
+    width: 960px;
+    margin-top: 6px;
+    float: left;
+}
+
+/*校务公开开始*/
+#xwgk_xxgk, #hdjx_jyky,#chief_keyword {
+    float: left;
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 942px;
+}
+
+#xwgk {
+    width: 520px;
+    float: left;
+}
+
+#xwgk h3 {
+    color: #705a5c;
+    padding: 10px;
+}
+
+#xwgk #xwgk_bg {
+    width: 520px;
+    height: 91px;
+    background: url(img/xwgk_bg.jpg) no-repeat;
+}
+
+#xxgk {
+    width: 400px;
+    float: left;
+    margin-left: 20px;
+    color: #636363;
+}
+
+#xxgk h3 {
+    color: #705a5c;
+    padding: 5px;
+    padding-top: 10px;
+    border-bottom: 5px solid #a32430;
+    margin-bottom: 5px;
+    line-height: normal;
+}
+
+#xxgk #xxgk_bg {
+    width: 130px;
+    height: 128px;
+    background: url(img/xxgk_bg.jpg) no-repeat;
+    float: left;
+}
+
+/*活动简讯,教育科研开始*/
+#hdjx, #jyky {
+    float: left;
+    width: 450px;
+    height: 327px;
+}
+
+#jyky {
+    margin-left: 35px;
+}
+
+#hdjx dt, #jyky dt {
+    height: 27px;
+    width: 450px;
+    background: url(img/hdjx_title_bg.jpg);
+}
+
+#hdjx dt .more, #jyky dt .more {
+    position: relative;
+    /*left: 360px;*/
+    float:left;
+    left:412px;
+    top: 6px;
+}
+
+#hdjx_jyky dt .more a:link, #hdjx_jyky dt .more a:visited {
+    color: #fff;
+    text-decoration: none;
+}
+
+#hdjx dt .t_title, #jyky dt .t_title {
+    font-weight: bold;
+    position: relative;
+    left: 10px;
+    top: 7px;
+}
+
+/*关键字开始*/
+#chief_keyword {
+    height:66px;   
+    border:1px solid #898989;
+   }
+
+#chief_keyword div{
+    border-left: 4px solid #266197;
+    height:66px;
+}
+
+#chief_keyword span{
+    padding:5px;
+    margin:5px;
+    float:left;
+    background-color: #698911;
+    color:#fff;
+    cursor: pointer;
+}
+
+.chief_keyword_hover{
+    background:#a32;
+}
+
+
+
+/*内容结束*/
+
+/*底部开始*/
+
+#bottom_con div{
+    float:left;
+    color:#fff;
+    position: relative;
+    top:30px;
+}
+
+#rd_team{
+    left:20px;
+}
+
+#copyright{
+    left:300px;
+}
+
+#tech_support{
+    left:600px;
+}
+
+
+/*底部结束*/
+
