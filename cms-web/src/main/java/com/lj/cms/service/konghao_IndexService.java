@@ -30,8 +30,8 @@ import com.lj.core.model.Topic;
  * @author Administrator
  *
  */
-@Service("indexService")
-public class IndexService implements IIndexService
+@Service("konghao_indexService")
+public class konghao_IndexService implements IIndexService
 {
 	private String outPath;
 	private FreemarkerUtil util;
@@ -51,7 +51,7 @@ public class IndexService implements IIndexService
 	/**
 	 * http://stackoverflow.com/questions/13711347/spring-constructor-dependency-injection-issues
 	 */
-	public IndexService()
+	public konghao_IndexService()
 	{
 		// XXX Auto-generated constructor stub
 	}
@@ -74,7 +74,7 @@ public class IndexService implements IIndexService
 	
 	
 	@Autowired(required=true)
-	public IndexService( String ftlPath,String outPath)
+	public konghao_IndexService( String ftlPath,String outPath)
 	{
 		
 		if(util==null){ 
@@ -108,29 +108,67 @@ public class IndexService implements IIndexService
 	@Override
 	public void generateBody()
 	{
-		System.out.println("================开始生成内容信息================");
+		System.out.println("=================重新生成了内容信息================");
+		//1.获取所有的首页栏目
+		List<Channel> channels=channelService.listAllIndexChannel(ChannelType.TOPIC_LIST);
+		channels.addAll(channelService.listAllIndexChannel(ChannelType.TOPIC_IMG));
+		//2.根据首页栏目创建相应的IndexTopic对象
+		//加载indexChannel.properties
+		Properties prop=PropertiesUtil.getInstance().load("indexChannel");
+		System.out.println(prop.get("10"));
+		Map<String,IndexTopic>topics=new HashMap<String,IndexTopic>();
 		
-		Map<String,Object>root=new HashMap<String,Object>();
+		/**
+		 * 这个for循环要对首页栏目进行遍历，获取栏目下所有要被生成到主页的文章信息。
+		 */
+		for(Channel c:channels){
+			System.out.println(c.getName());
+			
+			String[] xs=prop.getProperty(c.getId()+"").split("_"); //1_8这里1是排序号，8表示显示的文章标题数量。
+			String order=xs[0];
+			int num=Integer.parseInt(xs[1]);
+			
+			List<Topic>ts=topicService.listTopicByChannelAndNumber(c.getId(), num);
+			
+			System.out.println("topics= "+ts.size());
+			
+			IndexTopic it=new IndexTopic();
+			it.setChannel_id(c.getId());
+			it.setChannel_name(c.getName());
+			it.setTopics(ts);
+			topics.put(order, it);
+		}
+		
 		String outfile=SystemContext.getRealPath()+outPath+"/body.jsp";
+		Map<String,Object>root=new HashMap<String,Object>();
+		root.put("ts", topics);
+		
+		BaseInfo bi=BaseInfoUtil.getInstance().read();
+		int picNum=bi.getIndexPicNumber();
+		List<IndexPic>indexPics=indexPicService.listIndexPicByNum(picNum);
 		
 		
-		//1. 获取精灵动态栏目
-		List<Topic>affairs=topicService.listTopicByChannelAndNumber(139, 5);
+//		IndexPic a=new IndexPic();
+//		a.setLinkUrl("http://www.baidu.com");
+//		a.setTitle("baidu");
+//		a.setNewName("1390047601616.jpg");
+//		IndexPic a2=new IndexPic();
+//		a2.setLinkUrl("http://www.sina.com");
+//		a2.setTitle("sina");
+//		a2.setNewName("1390131966921.jpg");
+//		as.add(a); as.add(a2);
 		
+//		Topic xxgk=new Topic();
+//		xxgk.setSummary("这是学校概况");
 		
-		//2. 获取首页图片
-		List<IndexPic>indexPics=indexPicService.listIndexPicByNum(3);
+		Topic introduction=topicService.loadLatestTopicByColumn(1020);
 		
-		//3. 获取精灵公告
-		Topic annoucement = topicService.loadLatestTopicByColumn(140);
-		
-		
-		root.put("annoucement", annoucement);
+		//List<Keyword>keywords=Arrays.asList(new Keyword("ni",2),new Keyword("wo",3));
+		List<Keyword> keywords=keywordService.getMaxTimesKeyword(12);
+		root.put("keywords", keywords);
+		root.put("introduction",introduction);
 		root.put("pics", indexPics);
-		root.put("affairs", affairs);
-		
-		util.fprint(root, "/body.ftl", outfile);
-
+		util.fprint(root,"/body_exercise.ftl", outfile);
 	}
 
 }

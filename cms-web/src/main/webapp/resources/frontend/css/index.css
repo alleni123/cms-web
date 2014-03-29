@@ -1,0 +1,127 @@
+
+* {
+    margin: 0px;
+    padding: 0px;
+    font-size: 12px;
+    font-family: "宋体"
+}
+
+body {
+    background: #f6f4ea
+}
+a {
+    text-decoration: none
+}
+
+/*框架开始*/
+
+
+/*content*/
+
+/* content_con .dot_line {
+ position: relative;
+ top: 10px;
+ color: #D1E28C;
+ font-family: arial;
+ font-size: 9px;
+ left: 30px;
+ }*/
+
+#content_con .dot_line {
+    position: relative;
+    background: url(img/line_dot.jpg);
+    height: 1px;
+    top: 10px;
+}
+
+#content_con {
+    background-color: #fff;
+    /*margin-top: 8px;*/
+    border-radius: 7px;
+}
+
+#rollpic {
+    float: left;
+    width: 766px;
+    height: 750px;
+    margin-left: 10px;
+}
+
+#announcement {
+    float: left;
+    width: 319px;
+    height: 361px;
+    margin-left: 5px;
+}
+
+#announcement h3 {
+    position: relative;
+    left: 29px;
+    font-family: "微软雅黑";
+    font-size: 25px;
+    top: 18px;
+    font-weight: normal;
+}
+
+#announcement p {
+    top: 33px;
+    position: relative;
+    left: 31px;
+    width: 250px;
+    height: 60px;
+    white-space: normal;
+    line-height: 1.7em;
+    text-indent: 2em;
+    color: #666;
+}
+
+#affairs {
+    float: left;
+    width: 319px;
+    height: 361px;
+    margin-left: 5px;
+}
+
+#affairs dl {
+    top: 10px;
+    position: relative;
+}
+
+#affairs dt {
+    height: 30px;
+    padding-bottom: 17px;
+}
+
+#affairs dt span {
+    position: relative;
+    top: 6px;
+    left: 29px;
+    font-family: "微软雅黑";
+    font-size: 25px;
+}
+
+#affairs dd {
+    padding: 5px 0px;
+    width: 295px;
+}
+
+#affairs dd .index_affairs_link_dot {
+
+    background: url(img/dot.jpg) no-repeat;
+    background-position: 15px 50%;
+    padding-left: 19px;
+    position: relative;
+    width: 9px;
+    height: 20px;
+    float: left;
+}
+
+a.index_affairs_link:link, a.index_affairs_link:visited {
+    color: #666;
+    line-height: 17px;
+}
+
+.cycle-pager img {
+    border: 1px solid #d1e28b;
+}
+
